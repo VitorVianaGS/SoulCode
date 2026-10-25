@@ -7,3 +7,42 @@ Crie uma função ou classe GerenciadorNotificacoes que recebe um array de Notif
 dispara mensagens para todos simultaneamente.
 
 */
+
+
+interface Notificavel {
+    enviarMensagem(texto: string): void;
+}
+
+class NotificacaoEmail implements Notificavel {
+    enviarMensagem(texto: string): void {
+        console.log("Email enviado: " + texto);
+    }
+}
+
+class NotificacaoSMS implements Notificavel {
+    enviarMensagem(texto: string): void {
+        console.log("SMS enviado: " + texto);
+    }
+}
+
+class GerenciadorNotificacoes {
+    private notificacoes: Notificavel[];
+
+    constructor(notificacoes: Notificavel[]) {
+        this.notificacoes = notificacoes;
+    }
+
+    dispararMensagens(texto: string): void {
+        this.notificacoes.forEach(notificacao => {
+            notificacao.enviarMensagem(texto);
+        });
+    }
+}
+
+// Testando
+const email = new NotificacaoEmail();
+const sms = new NotificacaoSMS();
+
+const gerenciador = new GerenciadorNotificacoes([email, sms]);
+
+gerenciador.dispararMensagens("Seu pedido foi aprovado!");
