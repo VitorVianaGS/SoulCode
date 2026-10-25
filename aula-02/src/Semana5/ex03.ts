@@ -8,3 +8,33 @@ Au!" .
 Classe Gato que herda de Animal e sobrescreve para retornar "Miau!" .
 
 */
+
+class Animal{
+    public nome: string;
+    constructor(nome: string){
+        this.nome = nome;
+    }
+    emitirSom(): string{
+        return "Som genérico";
+    }
+}
+let animal = new Animal("Animal")
+console.log(animal.emitirSom())
+
+
+class Cachorro extends Animal{
+    emitirSom(): string {
+        return "Au Au"
+    }
+}
+let rex = new Cachorro("Rex")
+console.log(rex.emitirSom())
+
+
+class Gato extends Animal{
+    emitirSom(): string {
+        return "Miau Miau"
+    }
+}
+let yumi = new Gato("Yumi")
+console.log(yumi.emitirSom());
