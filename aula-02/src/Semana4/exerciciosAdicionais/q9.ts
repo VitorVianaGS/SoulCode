@@ -9,4 +9,4 @@ let produto = {
     preco: 3500
 };
 
-produto.preco = "R$ 3500"; // já denuncia que o tipo do preco não é string
+//produto.preco = "R$ 3500"; // já denuncia que o tipo do preco não é string

@@ -5,4 +5,4 @@ ocorre se você tentar executar frutas.push(10)?
 */
 
 let frutas = ["maçã", "banana", "laranja"];
-frutas.push(10) // Ocorre um erro por conta da lista ja ser do tipo string
+//frutas.push(10) // Ocorre um erro por conta da lista ja ser do tipo string

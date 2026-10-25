@@ -16,3 +16,4 @@ function exibirID(id: string | number){
 
 exibirID(123)
 exibirID("Vitor")
+
