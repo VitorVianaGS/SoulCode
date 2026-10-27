@@ -52,3 +52,64 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });
+
+/*
+Passo a passo para iniciar sua API
+
+1. Abra o projeto no VS Code
+
+Abra o VS Code e selecione File → Open Folder.
+
+Escolha a pasta:
+
+C:\starter
+
+
+
+
+2. Abra o terminal
+
+No VS Code, selecione Terminal → New Terminal.
+
+Seu terminal Git Bash deverá mostrar algo parecido com:
+victo@Vitor-Viana MINGW64 /c/starter (main)
+
+
+
+
+
+
+3. Inicie o servidor
+
+Execute:
+node SoulCode/servidor/server.js
+
+
+Aguarde a mensagem:
+🚀 Servidor rodando em http://localhost:3000
+
+
+Deixe o terminal aberto enquanto utiliza a API.
+
+
+
+
+4. Abra a API no navegador
+
+Acesse:
+
+http://localhost:3000/api/alunos
+
+O navegador deverá mostrar os alunos cadastrados no seu array.
+
+
+
+
+5. Encerre o servidor quando terminar
+
+Volte ao terminal e pressione:
+
+Ctrl + C
+
+Isso interrompe a execução da API.
+*/
