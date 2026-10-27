@@ -17,14 +17,14 @@ class Identificador{
     }
 
     exibirCodigo(): void{
-        if(this._codigo === "String"){
+        if(this._codigo === ""){
             console.log(this._codigo.toUpperCase());
         }
         console.log(this._codigo);
     }
 }
  let ana = new Identificador("Ana");
- let vitor = new Identificador(123);
+ let Vitor = new Identificador(123);
 
  ana.exibirCodigo();
- vitor.exibirCodigo();
+ Vitor.exibirCodigo();
