@@ -1,0 +1,276 @@
+Vou te mostrar como criar sua API de alunos do zero até o ponto em que estamos agora, utilizando Node.js, Express e JavaScript com CommonJS (`require`).
+
+A ideia é entender a sequência completa: criar o projeto, instalar o Express, desenvolver as rotas e executar no navegador.
+
+## 1. Criar o projeto
+
+Abra o VS Code, abra o terminal e execute:
+
+```
+mkdir minha-api
+cd minha-api
+```
+
+O primeiro comando cria uma pasta e o segundo entra nela.
+
+Agora inicialize o projeto Node.js:
+
+```
+npm init -y
+```
+
+Isso cria automaticamente o arquivo `package.json`.
+
+## 2. Instalar o Express
+
+Execute:
+
+```
+npm install express
+```
+
+O Express é um framework que facilita a criação de servidores e rotas HTTP no Node.js.
+
+Após a instalação, seu projeto terá:
+
+```
+minha-api/
+├── node_modules/
+├── package.json
+└── package-lock.json
+```
+
+## 3. Configurar o package.json
+
+Abra o `package.json` e verifique se contém estas configurações:
+
+```
+{
+  "name": "minha-api",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node servidor/server.js"
+  },
+  "dependencies": {
+    "express": "^5.0.0"
+  }
+}
+```
+
+O número da versão do Express pode ser diferente no seu computador. Mantenha a versão que o npm instalou, sem precisar substituí-la pelo exemplo.
+
+O `"type": "commonjs"` permite utilizar `require()` no seu código.
+
+## 4. Criar a estrutura de pastas
+
+Dentro de `minha-api`, crie uma pasta chamada `servidor` e, dentro dela, um arquivo chamado `server.js`.
+
+minha-api
+
+node_modules
+
+servidor
+
+server.js
+
+package.json
+
+package-lock.json
+
+## 5. Criar o servidor Express
+
+No arquivo `servidor/server.js`, comece com:
+
+```
+const express = require('express');
+
+const app = express();
+
+app.use(express.json());
+```
+
+Entendendo:
+
+- `require('express')`: importa o Express.
+- `express()`: cria a aplicação.
+- `app.use(express.json())`: permite interpretar corpos de requisições em JSON.
+
+## 6. Criar os dados dos alunos
+
+Como ainda não estamos utilizando banco de dados, vamos armazenar os alunos em um array.
+
+```
+let alunos = [
+  { id: 1, nome: "Ana", idade: 20 },
+  { id: 2, nome: "Carlos", idade: 22 }
+];
+```
+
+Esses dados ficarão temporariamente na memória RAM enquanto o servidor estiver executando.
+
+## 7. Criar as rotas da API
+
+Agora vamos adicionar três operações.
+
+### GET — Consultar alunos
+
+```
+app.get('/api/alunos', (req, res) => {
+  res.json(alunos);
+});
+```
+
+Quando alguém acessar `/api/alunos` usando GET, a API devolverá a lista completa.
+
+### POST — Cadastrar aluno
+
+```
+app.post('/api/alunos', (req, res) => {
+  const novoAluno = {
+    id: alunos.length + 1,
+    nome: req.body.nome,
+    idade: req.body.idade
+  };
+
+  alunos.push(novoAluno);
+
+  res.status(201).json(novoAluno);
+});
+```
+
+Essa rota recebe os dados enviados pelo cliente, cria um aluno e adiciona ao array.
+
+O status `201` indica que o recurso foi criado.
+
+A geração do ID é simplificada para estudo e precisará ser melhorada para evitar duplicações.
+
+### DELETE — Excluir aluno
+
+```
+app.delete('/api/alunos/:id', (req, res) => {
+  const idParaExcluir = parseInt(req.params.id);
+
+  alunos = alunos.filter(
+    aluno => aluno.id !== idParaExcluir
+  );
+
+  res.status(204).send();
+});
+```
+
+Essa rota recebe o ID pela URL e remove o aluno correspondente do array.
+
+O status `204` indica que a requisição foi concluída sem conteúdo na resposta. Nesse exemplo, ele é retornado mesmo quando o ID não existe.
+
+## 8. Iniciar o servidor
+
+No final do arquivo `server.js`, adicione:
+
+```
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+});
+```
+
+O método `listen()` faz a aplicação começar a receber requisições na porta 3000.
+
+## 9. Executar a API
+
+No terminal, estando dentro da pasta `minha-api`, execute:
+
+```
+npm start
+```
+
+Como configuramos o script `start` no `package.json`, o npm executará automaticamente:
+
+```
+node servidor/server.js
+```
+
+Se tudo estiver correto:
+
+```
+🚀 Servidor rodando em http://localhost:3000
+```
+
+## 10. Testar a API
+
+GET /api/alunos
+
+200 OK
+
+Acesse no navegador:
+
+[http://localhost:3000/api/alunos](http://localhost:3000/api/alunos?utm_source=chatgpt.com)
+
+Resposta esperada:
+
+```
+[
+  {
+    "id": 1,
+    "nome": "Ana",
+    "idade": 20
+  },
+  {
+    "id": 2,
+    "nome": "Carlos",
+    "idade": 22
+  }
+]
+```
+
+Para testar o POST e DELETE, você pode usar o Postman.
+
+| Método | Endereço        | Resultado         |
+| ------ | --------------- | ----------------- |
+| GET    | `/api/alunos`   | Lista os alunos   |
+| POST   | `/api/alunos`   | Cadastra um aluno |
+| DELETE | `/api/alunos/1` | Exclui o aluno 1  |
+
+## 11. Preparar o projeto para o GitHub
+
+Crie um arquivo `.gitignore` na raiz do projeto:
+
+```
+node_modules/
+.env
+.env.*
+!.env.example
+```
+
+Isso impede que dependências instaladas e arquivos de ambiente sejam adicionados ao Git em operações normais. Arquivos já versionados precisam ser removidos do índice separadamente.
+
+## Resumo do fluxo completo
+
+1\. Criar a pasta do projeto
+
+mkdir minha-api
+
+2\. Inicializar o Node.js
+
+npm init -y
+
+3\. Instalar o Express
+
+npm install express
+
+4\. Criar o server.js
+
+Configurar servidor, dados e rotas
+
+5\. Iniciar a aplicação
+
+npm start
+
+6\. API funcionando
+
+[http://localhost:3000/api/alunos](http://localhost:3000/api/alunos?utm_source=chatgpt.com)
+
+Até aqui, você criou uma API REST básica com três operações do CRUD: Read (GET), Create (POST) e Delete (DELETE).
+
+O próximo passo natural é implementar o PUT para atualizar alunos, completando as quatro operações fundamentais do CRUD.

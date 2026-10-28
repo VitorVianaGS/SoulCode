@@ -65,8 +65,6 @@ Escolha a pasta:
 C:\starter
 
 
-
-
 2. Abra o terminal
 
 No VS Code, selecione Terminal → New Terminal.
