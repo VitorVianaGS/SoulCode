@@ -74,9 +74,6 @@ victo@Vitor-Viana MINGW64 /c/starter (main)
 
 
 
-
-
-
 3. Inicie o servidor
 
 Execute:
