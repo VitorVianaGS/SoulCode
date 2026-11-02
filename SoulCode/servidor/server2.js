@@ -7,7 +7,7 @@ let clientes = [
   { codigo: "CLI002", nome: "Mariana", email: "mariana@email.com" },
   { codigo: "CLI003", nome: "Rafael", email: "rafael@email.com" },
   { codigo: "CLI004", nome: "Juliana", email: "juliana@email.com" },
-  { codigo: "CLI005", nome: "Pedro", email: "pedro@email.com" },
+  { codigo: "CLI005", nome: "Pietro", email: "pedro@email.com" },
   { codigo: "CLI006", nome: "Fernanda", email: "fernanda@email.com" },
   { codigo: "CLI007", nome: "Gabriel", email: "gabriel@email.com" },
   { codigo: "CLI008", nome: "Camila", email: "camila@email.com" },
