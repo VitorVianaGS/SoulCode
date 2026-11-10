@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Turístico de Guarulhos - Descubra a Cidade</title>
+</head>
+<body>
+
+    <header>
+        <h1>Guia Turístico: Descubra Guarulhos</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Sobre Guarulhos</h2>
+            <p>Guarulhos é o segundo município mais populoso do estado de São Paulo e uma das cidades mais importantes da Região Metropolitana. </p>
+            <p>Conhecida nacional e internacionalmente por sediar o Aeroporto Internacional de Cumbica, o maior da América Latina, a cidade vai muito além de um ponto de conexão de voos e carrega uma rica história e diversidade cultural.</p>
+            <p>Localizada a poucos quilômetros da capital paulista, Guarulhos surpreende seus visitantes com belas opções de turismo ecológico na Serra da Cantareira, parques urbanos bem estruturados, </p>
+            <p>centros culturais dinâmicos e uma gastronomia diversificada. É o destino ideal tanto para quem está de passagem quanto para quem deseja explorar novas opções de lazer no estado.</p>
+        </section>
+
+        <section>
+            <h2>Principais Pontos Turísticos</h2>
+            <ul>
+                <li>
+                    <h3>Parque Bosque Maia</h3>
+                    <p>O maior parque urbano de Guarulhos, ideal para caminhadas, esportes e momentos de lazer em família. Conta com vasta área verde, pistas de corrida e espaços para eventos culturais.</p>
+                    <img src="./bosqueMaia.png" alt="Vista da pista de caminhada e vegetação do Parque Bosque Maia em Guarulhos" width="250">
+                </li>
+                <li>
+                    <h3>Parque Estadual da Cantareira - Núcleo Cabuçu</h3>
+                    <p>Uma importante reserva de Mata Atlântica que oferece trilhas ecológicas, como a Trilha da Cachoeira, além de uma vista incrível da barragem do Cabuçu.</p>
+                    <img src="./cantareira.png" alt="Trilha em meio à vegetação preservada no Núcleo Cabuçu da Serra da Cantareira" width="250">
+                </li>
+                <li>
+                    <h3>Lago dos Patos (Vila Galvão)</h3>
+                    <p>Um dos locais de lazer mais tradicionais da cidade, cercado por vegetação, pedalinhos, feiras de artesanato e opções gastronômicas ao redor do lago.</p>
+                    <img src="./lagoPatos.png" alt="Lago dos Patos com pedalinhos na água e área arborizada ao redor" width="250">
+                </li>
+                <li>
+                    <h3>Centro Cultural Adamastor</h3>
+                    <p>O principal polo cultural da cidade, abrigando teatro, biblioteca, exposições de arte e diversos eventos educativos e artísticos ao longo do ano.</p>
+                    <img src="./adamastor.png" alt="Fachada moderna da arquitetura do Centro Cultural Adamastor em Guarulhos" width="250">
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Contato & Avaliação do Visitante</h2>
+            <form action="#" method="post">
+                <!-- Bloco 1: Identificação do Visitante -->
+                <fieldset>
+                    <legend>Identificação do Visitante</legend>
+
+                    <p>
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required autofocus>
+                    </p>
+
+                    <p>
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                    </p>
+
+                    <p>
+                        <label for="whatsapp">WhatsApp / Telefone:</label>
+                        <input 
+                            type="tel" 
+                            id="whatsapp" 
+                            name="whatsapp" 
+                            placeholder="(11) 91234-5678" 
+                            pattern="\(\d{2}\)\s\d{5}-\d{4}" 
+                            title="Digite no formato (DD) 9XXXX-XXXX" 
+                            required
+                        >
+                    </p>
+                </fieldset>
+
+                <!-- Bloco 2: Opinião & Ponto Turístico -->
+                <fieldset>
+                    <legend>Opinião & Ponto Turístico</legend>
+
+                    <p>
+                        <label for="ponto-turistico">Ponto Turístico Favorito:</label>
+                        <input type="text" id="ponto-turistico" name="ponto_turistico" list="pontos-guarulhos" placeholder="Selecione ou digite um ponto turístico">
+                        <datalist id="pontos-guarulhos">
+                            <option value="Parque Bosque Maia"></option>
+                            <option value="Parque Estadual da Cantareira - Núcleo Cabuçu"></option>
+                            <option value="Lago dos Patos"></option>
+                            <option value="Centro Cultural Adamastor"></option>
+                        </datalist>
+                    </p>
+
+                    <p>
+                        <label for="avaliacao">Avaliação da Cidade (1 a 10):</label>
+                        <input type="range" id="avaliacao" name="avaliacao" min="1" max="10" value="5">
+                    </p>
+
+                    <p>
+                        <label for="cor-tema">Cor do Tema Sugerida:</label>
+                        <input type="color" id="cor-tema" name="cor_tema" value="#008080">
+                    </p>
+
+                    <p>
+                        <label for="comentario">Relato / Comentário:</label><br>
+                        <textarea id="comentario" name="comentario" rows="5" cols="40" placeholder="Conte-nos como foi sua experiência na cidade..."></textarea>
+                    </p>
+                </fieldset>
+
+                <!-- Bloco 3: Ações de Envio -->
+                <p>
+                    <button type="submit">Enviar Avaliação</button>
+                    <button type="reset">Limpar Formulário</button>
+                </p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Guia Turístico de Guarulhos. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
