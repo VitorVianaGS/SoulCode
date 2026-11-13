@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- Meta tag viewport: essencial para responsividade, ajustando a escala em celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Reações Interativas</title>
+  <!-- Vinculamos a folha de estilos externa -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- <header>: Tag semântica para o cabeçalho principal da página -->
+  <header class="cabecalho">
+    <h1>Painel de Reações</h1>
+    <!-- Botão que receberá a interatividade do DOM para alternar o tema -->
+    <button id="btn-tema" class="btn-tema" aria-label="Alternar tema">
+      🌙 Modo Escuro
+    </button>
+  </header>
+
+  <!-- <main>: Indica o conteúdo principal e central do documento -->
+  <main class="container">
+    
+    <!-- <section>: Bloco temático que agrupa o post principal e os emojis -->
+    <section class="card-post">
+      <!-- Tag visual de destaque para contextualizar a atividade -->
+      <span class="tag">Aula Prática • DOM & TypeScript</span>
+      <h2>Como está o ritmo da nossa aula hoje?</h2>
+      <p>Clique nas reações abaixo para votar em tempo real ou deixe um comentário rápido para a turma!</p>
+
+      <!-- Painel de Emojis: Agrupa os botões de votação -->
+      <div class="painel-reacoes">
+        <!-- Cada botão possui um atributo de dados (data-reacao) e um contador interno -->
+        <button class="btn-reacao" data-reacao="curtir">
+          <span class="emoji">👍</span>
+          <span class="rotulo">Curtir</span>
+          <!-- O span com ID será manipulado dinamicamente pelo script -->
+          <span class="contador" id="cont-curtir">0</span>
+        </button>
+
+        <button class="btn-reacao" data-reacao="amar">
+          <span class="emoji">❤️</span>
+          <span class="rotulo">Amei</span>
+          <span class="contador" id="cont-amar">0</span>
+        </button>
+
+        <button class="btn-reacao" data-reacao="fogo">
+          <span class="emoji">🔥</span>
+          <span class="rotulo">Show!</span>
+          <span class="contador" id="cont-fogo">0</span>
+        </button>
+
+        <button class="btn-reacao" data-reacao="duvida">
+          <span class="emoji">🤔</span>
+          <span class="rotulo">Dúvida</span>
+          <span class="contador" id="cont-duvida">0</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Seção dedicada ao mural de comentários dinâmicos -->
+    <section class="card-comentarios">
+      <h3>Mural da Turma (<span id="total-comentarios">0</span>)</h3>
+
+      <!-- Formulário capturado pelo evento 'submit' no TypeScript/JavaScript -->
+      <form id="form-comentario" class="form-comentario">
+        <input 
+          type="text" 
+          id="input-comentario" 
+          placeholder="Escreva um feedback ou dúvida rápida..." 
+          autocomplete="off"
+        >
+        <button type="submit" class="btn-enviar">Enviar</button>
+      </form>
+
+      <!-- Lista não ordenada (<ul>) onde os novos <li> criados via DOM serão injetados -->
+      <ul id="lista-comentarios" class="lista-comentarios">
+        <!-- Os itens surgem aqui dinamicamente -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- O script é carregado no final para garantir que o DOM esteja totalmente construído -->
+  <script src="emojis.js" defer></script>
+</body>
+</html>
