@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfólio Profissional | Vitor Viana</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Cabeçalho semântico com avatar, identificação e botão de tema -->
+  <header class="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <div class="perfil">
+        <img
+          src="https://ui-avatars.com/api/?name=Vitor+Viana&background=2563eb&color=fff&size=128"
+          alt="Foto de perfil de Vitor Viana"
+          class="avatar"
+        />
+        <div class="perfil-info">
+          <h1>Vitor Viana</h1>
+          <p class="cargo">Desenvolvedor Full Stack & Analista de Dados</p>
+        </div>
+      </div>
+
+      <button
+        id="btn-tema"
+        type="button"
+        class="btn-tema"
+        aria-label="Alternar tema claro e escuro"
+      >
+        🌙 Modo Escuro
+      </button>
+    </div>
+  </header>
+
+  <main class="container principal">
+    <!-- Seção Sobre Mim -->
+    <section class="card" aria-labelledby="titulo-sobre">
+      <h2 id="titulo-sobre">Sobre Mim</h2>
+      <p>
+        Estudante de Análise e Desenvolvimento de Sistemas com foco em desenvolvimento web,
+        back-end e análise de dados. Tenho experiência prática com gestão operacional e
+        construção de soluções digitais orientadas a resultados, buscando evoluir continuamente
+        na criação de aplicações escaláveis, bem estruturadas e centradas no usuário.
+      </p>
+      <p class="tecnologias-destaque">
+        <strong>Stack em estudo e prática:</strong> HTML5, CSS3, TypeScript, Java, Spring Boot, Python e SQL.
+      </p>
+    </section>
+
+    <!-- Seção Projetos e Habilidades com adição dinâmica -->
+    <section class="card" aria-labelledby="titulo-portfolio">
+      <h2 id="titulo-portfolio">Projetos & Habilidades</h2>
+      <p class="descricao-secao">
+        Adicione novos projetos ou competências técnicas à lista abaixo em tempo real:
+      </p>
+
+      <!-- Formulário para inserção dinâmica via DOM -->
+      <form id="form-item" class="form-item">
+        <input
+          type="text"
+          id="input-item"
+          placeholder="Ex.: API REST com Spring Boot ou Dashboard em Python..."
+          aria-label="Novo projeto ou habilidade"
+          required
+        />
+        <button type="submit" class="btn-adicionar">Adicionar</button>
+      </form>
+
+      <!-- Lista onde os nós <li> serão inseridos -->
+      <ul id="lista-itens" class="lista-itens">
+        <li>CineLocal — Portal web responsivo em HTML5 e CSS3</li>
+        <li>Manipulação tipada do DOM com TypeScript</li>
+        <li>Análise exploratória de dados com Python e Pandas</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>© 2026 Vitor Viana — Desenvolvido com HTML5, CSS3 e TypeScript.</p>
+    </div>
+  </footer>
+
+  <!-- Referência ao arquivo JavaScript compilado -->
+  <script src="app.js" defer></script>
+</body>
+</html>

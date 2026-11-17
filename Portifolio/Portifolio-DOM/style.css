@@ -1,0 +1,248 @@
+/* Variáveis do Tema Claro (Padrão) */
+:root {
+  --bg-pagina: #f4f6f9;
+  --bg-card: #ffffff;
+  --bg-item: #f8fafc;
+  --texto-principal: #1e293b;
+  --texto-secundario: #475569;
+  --cor-primaria: #2563eb;
+  --cor-primaria-hover: #1d4ed8;
+  --borda: #e2e8f0;
+  --sombra: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+/* Variáveis do Tema Escuro (ativado via classe .dark-mode no <body>) */
+body.dark-mode {
+  --bg-pagina: #0f172a;
+  --bg-card: #1e293b;
+  --bg-item: #334155;
+  --texto-principal: #f8fafc;
+  --texto-secundario: #cbd5e1;
+  --cor-primaria: #3b82f6;
+  --cor-primaria-hover: #60a5fa;
+  --borda: #334155;
+  --sombra: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Reset básico para evitar quebra horizontal */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-pagina);
+  color: var(--texto-principal);
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Cabeçalho Mobile-First (empilhado em telas pequenas) */
+.cabecalho {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--borda);
+  box-shadow: var(--sombra);
+  padding: 1.5rem 0;
+}
+
+.cabecalho-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+.perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--cor-primaria);
+}
+
+.perfil-info h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.cargo {
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Botão de Tema */
+.btn-tema {
+  background-color: var(--bg-item);
+  color: var(--texto-principal);
+  border: 1px solid var(--borda);
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-tema:hover {
+  border-color: var(--cor-primaria);
+  transform: translateY(-1px);
+}
+
+/* Conteúdo Principal */
+.principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--sombra);
+}
+
+.card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: var(--cor-primaria);
+}
+
+.card p {
+  color: var(--texto-secundario);
+}
+
+.tecnologias-destaque {
+  margin-top: 0.85rem;
+  color: var(--texto-principal) !important;
+}
+
+.descricao-secao {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Formulário Responsivo (Mobile-First) */
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-item input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--borda);
+  background-color: var(--bg-pagina);
+  color: var(--texto-principal);
+  font-size: 0.95rem;
+}
+
+.form-item input:focus {
+  outline: 2px solid var(--cor-primaria);
+  border-color: transparent;
+}
+
+.btn-adicionar {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-adicionar:hover {
+  background-color: var(--cor-primaria-hover);
+}
+
+/* Grade de Projetos / Habilidades (1 coluna no mobile) */
+.lista-itens {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.lista-itens li {
+  background-color: var(--bg-item);
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--cor-primaria);
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Rodapé */
+.rodape {
+  text-align: center;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-secundario);
+  font-size: 0.85rem;
+}
+
+/* Media Query para Tablets e Desktops (>= 640px) */
+@media (min-width: 640px) {
+  .cabecalho-conteudo {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .perfil {
+    flex-direction: row;
+  }
+
+  .form-item {
+    flex-direction: row;
+  }
+
+  .form-item input {
+    flex: 1;
+  }
+
+  .lista-itens {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Media Query para Telas Maiores (>= 900px) */
+@media (min-width: 900px) {
+  .lista-itens {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
