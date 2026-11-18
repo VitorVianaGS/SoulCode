@@ -12,3 +12,31 @@
   },
   "include": ["src/**/*"]
 }
+
+
+//versão do aluisio
+//exige que o código esteja numa pasta ./ts
+//compila para ./js
+
+
+// {
+//   "compilerOptions": {
+//     "target": "es2021",
+//     "module": "es2015",
+//     "moduleResolution": "Bundler",
+
+//     "rootDir": "./ts",
+//     "outDir": "./js",
+//     "sourceMap": false, // Remove a geração de arquivos .js.map
+//     "declaration": false, // Remove a geração de arquivos de declaração .d.ts
+//     "declarationMap": false, // Remove a geração de arquivos .d.ts.map
+//     "strict": true,
+//     "noEmitOnError": true,
+
+//     "lib": ["ES2025", "DOM", "DOM.Iterable"],
+
+//     "skipLibCheck": true
+//   },
+//   "include": ["ts/**/*.ts"],
+//   "exclude": ["node_modules", "js"]
+// }
