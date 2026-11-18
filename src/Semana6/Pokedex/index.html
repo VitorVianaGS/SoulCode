@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex Express - TypeScript</title>
+    <!-- Vincula o arquivo CSS externo para estilização -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <h1>Busca Pokémon ⚡</h1>
+        
+        <!-- Área de entrada de dados -->
+        <div class="search-box">
+            <input type="text" id="pokemonInput" placeholder="Ex: pikachu, ditto, charmander" autocomplete="off" />
+            <button id="searchBtn">Pesquisar</button>
+        </div>
+
+        <!-- Área onde o card do Pokémon será injetado dinamicamente via TypeScript -->
+        <div id="pokemonCard" class="card-container"></div>
+    </main>
+
+    <!-- Script compilado do TypeScript -->
+    <script src="script.js"></script>
+</body>
+</html>
