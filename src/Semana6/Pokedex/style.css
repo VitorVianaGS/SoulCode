@@ -1,5 +1,5 @@
 /* Resumo básico de reset e fontes */
-{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;

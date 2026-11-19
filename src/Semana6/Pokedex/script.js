@@ -4,7 +4,7 @@ const inputElement = document.getElementById("pokemonInput");
 const searchButton = document.getElementById("searchBtn");
 const cardContainer = document.getElementById("pokemonCard");
 searchButton.addEventListener("click", async () => {
-    const busca = inputElement.value.trim().toLowerCase;
+    const busca = inputElement.value.trim().toLowerCase();
     if (!busca) {
         cardContainer.innerHTML = "<p class='message error'>Digite o nome do Pokemon</p>";
         return;
@@ -17,14 +17,20 @@ searchButton.addEventListener("click", async () => {
         }
         ;
         const data = await resposta.json();
-        const tipo = data.types[0].type.name;
+        const tipo = data.types[0]?.type.name;
         cardContainer.innerHTML = `
             <div class="pokemon-card">
                 <h2>${data.name}</h2>
                 <img src="${data.sprites.front_default}" alt="Imagem do ${data.name}"/>
-                <p><stong>Tipo:</strong>${tipo}</p>
-            </div>`;
+                <p><strong>Tipo:</strong>${tipo}</p>
+            </div>
+            `;
+        console.log("teste");
     }
-    finally {
+    catch (erro) {
+        console.error("Erro na busca", erro);
+        cardContainer.innerHTML = `
+        <p class= "message error">Não encontramos o Pokémon</p>
+        `;
     }
 });
