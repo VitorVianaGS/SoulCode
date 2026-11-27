@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Tarefas • Full-Stack TS</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 640px;
+      margin: 40px auto;
+      padding: 0 16px;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      background: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+    }
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-edit { background: #e2e8f0; color: #1e293b; }
+    .btn-delete { background: #ef4444; color: #fff; }
+    .status-box {
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+    }
+    .status-error {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+    .concluida {
+      text-decoration: line-through;
+      color: #64748b;
+    }
+    .acoes {
+      display: flex;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Catálogo de Tarefas</h1>
+
+  <form id="form-tarefa">
+    <input type="text" id="input-titulo" placeholder="Digite uma nova tarefa..." required />
+    <label style="display: flex; align-items: center; gap: 4px; font-size: 14px;">
+      <input type="checkbox" id="input-concluida" /> Concluída
+    </label>
+    <button type="submit" class="btn-primary">Adicionar</button>
+  </form>
+
+  <!-- Container dos 3 Estados da Tela -->
+  <div id="app-estado"></div>
+
+  <script type="module">
+    import { listar, criar, atualizar, deletar } from './api.js';
+
+    const form = document.getElementById('form-tarefa');
+    const inputTitulo = document.getElementById('input-titulo');
+    const inputConcluida = document.getElementById('input-concluida');
+    const containerEstado = document.getElementById('app-estado');
+
+    // Estado 1: Loading
+    function renderizarLoading() {
+      containerEstado.innerHTML = `
+        <div class="status-box">
+          ⏳ Carregando tarefas do servidor...
+        </div>
+      `;
+    }
+
+    // Estado 3: Error
+    function renderizarErro(mensagem) {
+      containerEstado.innerHTML = `
+        <div class="status-box status-error">
+          <p><strong>Falha na comunicação com a API:</strong> ${mensagem}</p>
+          <button id="btn-tentar-novamente" class="btn-primary">Tentar novamente</button>
+        </div>
+      `;
+
+      document
+        .getElementById('btn-tentar-novamente')
+        .addEventListener('click', carregarTarefas);
+    }
+
+    // Estado 2: Success
+    function renderizarLista(tarefas) {
+      if (tarefas.length === 0) {
+        containerEstado.innerHTML = `
+          <div class="status-box">
+            Nenhuma tarefa cadastrada no momento.
+          </div>
+        `;
+        return;
+      }
+
+      const itensHtml = tarefas
+        .map(
+          (tarefa) => `
+          <li>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input
+                type="checkbox"
+                class="chk-status"
+                data-id="${tarefa.id}"
+                ${tarefa.concluida ? 'checked' : ''}
+              />
+              <span class="${tarefa.concluida ? 'concluida' : ''}">
+                #${tarefa.id} - ${tarefa.titulo}
+              </span>
+            </label>
+            <div class="acoes">
+              <button class="btn-edit" data-id="${tarefa.id}" data-titulo="${tarefa.titulo}">
+                Editar
+              </button>
+              <button class="btn-delete" data-id="${tarefa.id}">
+                Excluir
+              </button>
+            </div>
+          </li>
+        `
+        )
+        .join('');
+
+      containerEstado.innerHTML = `<ul>${itensHtml}</ul>`;
+    }
+
+    // Fluxo principal de busca
+    async function carregarTarefas() {
+      renderizarLoading();
+      try {
+        const tarefas = await listar();
+        renderizarLista(tarefas);
+      } catch (erro) {
+        const msg = erro instanceof Error ? erro.message : 'Servidor indisponível.';
+        renderizarErro(msg);
+      }
+    }
+
+    // Cadastro via formulário
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        await criar({
+          titulo: inputTitulo.value,
+          concluida: inputConcluida.checked
+        });
+        form.reset();
+        await carregarTarefas();
+      } catch (erro) {
+        const msg = erro instanceof Error ? erro.message : 'Erro ao salvar.';
+        renderizarErro(msg);
+      }
+    });
+
+    // Delegação de eventos para Excluir, Editar e Marcar Concluída
+    containerEstado.addEventListener('click', async (e) => {
+      const alvo = e.target;
+      if (!(alvo instanceof HTMLElement)) return;
+
+      // Botão Excluir
+      if (alvo.classList.contains('btn-delete')) {
+        const id = Number(alvo.dataset.id);
+        try {
+          await deletar(id);
+          await carregarTarefas();
+        } catch (erro) {
+          renderizarErro('Não foi possível excluir a tarefa.');
+        }
+      }
+
+      // Botão Editar (Bônus PUT)
+      if (alvo.classList.contains('btn-edit')) {
+        const id = Number(alvo.dataset.id);
+        const tituloAtual = alvo.dataset.titulo || '';
+        const novoTitulo = prompt('Editar título da tarefa:', tituloAtual);
+
+        if (novoTitulo !== null && novoTitulo.trim() !== '') {
+          try {
+            await atualizar(id, { titulo: novoTitulo.trim() });
+            await carregarTarefas();
+          } catch (erro) {
+            renderizarErro('Não foi possível editar a tarefa.');
+          }
+        }
+      }
+    });
+
+    // Alternar checkbox de concluída (Bônus PUT)
+    containerEstado.addEventListener('change', async (e) => {
+      const alvo = e.target;
+      if (alvo instanceof HTMLInputElement && alvo.classList.contains('chk-status')) {
+        const id = Number(alvo.dataset.id);
+        try {
+          await atualizar(id, { concluida: alvo.checked });
+          await carregarTarefas();
+        } catch (erro) {
+          renderizarErro('Não foi possível atualizar o status.');
+        }
+      }
+    });
+
+    // Inicialização ao abrir a página
+    carregarTarefas();
+  </script>
+</body>
+</html>
